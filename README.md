@@ -1,6 +1,8 @@
 # RP6
 Modifications of code repository for RP6-code from http://www.arexx.com/rp6
 
+![RP6](http://www.arexx.com/rp6/html/images/rp6/rp6.jpg "picture")
+
 ## Updates from original source
 - Makefile of examples projects are simplied. See for instance this [makefile](RP6Examples_20080510/RP6CONTROL_EXAMPLES/Example_01_LCD/makefile) that includes [makefile.control](RP6Examples_20080510/RP6Lib/RP6control/makefile.control).
 - Support for unit testing using unity. Located at [unity](RP6Examples_20080510/unity) directory.
