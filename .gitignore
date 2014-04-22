@@ -5,10 +5,9 @@
 *.lst
 *.map
 *.sym
+*.swp
 
 .dep
-
-
 
 *.exe
 *.hex
