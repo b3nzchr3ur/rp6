@@ -32,7 +32,6 @@ EXTRAINCDIRS = $(RP6_LIB_PATH) $(RP6_LIB_PATH_OTHERS)
 # Main Source file is _automatically_ added here:
 SRC = $(TARGET).c
 SRC += level_check.c
-SRC += led_values_updater.c
 
 SRC += $(RP6_LIB_PATH_CONTROL)/RP6ControlLib.c
 SRC += $(RP6_LIB_PATH_COMMON)/RP6uart.c

@@ -32,10 +32,8 @@ EXTRAINCDIRS = $(RP6_LIB_PATH) $(RP6_LIB_PATH_OTHERS) $(UNITY_LIB_PATH) $(CODE_T
 #------------------------------------------------
 # Main Source file is _automatically_ added here:
 SRC = $(TARGET).c
-SRC += led_values_updater_test.c
 SRC += level_check_test.c
 
-SRC += $(CODE_TO_TEST_PATH)/led_values_updater.c
 SRC += $(CODE_TO_TEST_PATH)/level_check.c
 
 #Additional files for the unit-testing framework and logging

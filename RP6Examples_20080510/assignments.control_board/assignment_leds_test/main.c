@@ -1,7 +1,7 @@
 #include "unity.h"
 #include <stdio.h>
-#include "led_values_updater_test.h"
 #include "level_check_test.h"
+//#include "led_values_updater_test.h"
 
 /*****************************************************************************/
 
@@ -26,7 +26,7 @@ int rp6_output_char_for_unity(int character)
 int main(void)
 {
 	UnityBegin();
-	led_values_updater_run_testcases();
+	//led_values_updater_run_testcases();
 	level_check_run_testcases();
 	UnityEnd();
 }
