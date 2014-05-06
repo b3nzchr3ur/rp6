@@ -6,6 +6,7 @@
 *.map
 *.sym
 *.swp
+*.elf
 
 .dep
 
