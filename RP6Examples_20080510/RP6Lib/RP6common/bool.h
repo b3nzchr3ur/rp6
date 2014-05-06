@@ -5,8 +5,8 @@
 
 typedef uint8_t bool;
 
-#define true (0)
-#define false (!true)
+#define false (0)
+#define true (!false)
 
 #define TRUE true
 #define FALSE false
