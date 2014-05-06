@@ -32,7 +32,7 @@ int main(void)
 {
 	initRP6Control(); // Always call this first! 
 
-	writeString_P("\n\nRP6Control Microphone Example Program!\n"); 
+	writeString_P("\n\nRP6Control Microphone Modulation!\n"); 
 	
 	sound(180,80,25);
 	sound(220,80,0);
