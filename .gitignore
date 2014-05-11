@@ -13,4 +13,4 @@
 *.exe
 *.hex
 
-RobotLoader_20120924/logfiles/*
+RobotLoader_20120924/logfiles/*.log
