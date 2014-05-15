@@ -10,5 +10,5 @@ Modifications of code repository for RP6-code from http://www.arexx.com/rp6
 - Include [RP6control_I2CMasterLib](RP6Examples_20080510/RP6Lib/RP6control_I2CMasterLib) into RP6Lib directory. 
 - Added [unit testing examples](RP6Examples_20080510/assignments.control_board/c_coding_examples_with_unit_test_on_rp6).
 
-#Tooling
+## Tooling
 - Added [command line script](RobotLoader_20120924/README.md) to RobotLoader for programming RP6. (Kudos to [@Xesxen](http://github.com/Xesxen) and [@Bramvangemert](http://github.com/Bramvangemert)).
