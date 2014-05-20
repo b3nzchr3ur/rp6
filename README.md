@@ -11,4 +11,5 @@ Modifications of code repository for RP6-code from http://www.arexx.com/rp6
 - Added [unit testing examples](RP6Examples_20080510/assignments.control_board/c_coding_examples_with_unit_test_on_rp6).
 
 ## Tooling
+- Added [install script](rp6.install.sh) for Linux systems.
 - Added [command line script](RobotLoader_20120924/README.md) to RobotLoader for programming RP6. (Kudos to [@Xesxen](http://github.com/Xesxen) and [@Bramvangemert](http://github.com/Bramvangemert)).
