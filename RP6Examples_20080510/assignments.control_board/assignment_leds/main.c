@@ -32,6 +32,19 @@
 
 #define MICROPHONE_THRESHOLD_LEVEL (100)
 
+
+/** This method calculates the new settings of the led lights when an update is requested.
+  * 
+  * Examples: Input: led_value = 0b0000 (all lights are OFF) 
+  *           Output: new_led_value = 0b0001.
+  *
+  *	      Input: led_value = 0b0001 (only one light is ON) 
+  *           Output: new_led_value = 0b0010.
+  *
+  * \param led_values          : Input for the current value of the led lights
+  * \param new_led_values_ptr  : Output for light value of the led lights after being updated
+  *
+  */
 void led_values_update(uint8_t led_values, uint8_t* new_led_values_ptr)
 {
 	//TODO: create implementation
