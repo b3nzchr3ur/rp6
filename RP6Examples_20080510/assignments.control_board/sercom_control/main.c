@@ -3,7 +3,6 @@
  * RP6 ROBOT SYSTEM - ROBOT CONTROL EXAMPLE
  * ****************************************************************************
  * Example: Serial Interface Example - reading and writing numbers and strings
- * Author(s): P. Lambooij
  * ****************************************************************************
  *
  * Description:
