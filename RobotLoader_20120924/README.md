@@ -12,7 +12,7 @@ Alternative is to run the above commands as superuser:
 - 64 bits system: `sudo ./robotloader_linux_x64.sh`
 
 # RobotFlasher
-You can run the program by going to this directory and typing `./robotflasher.sh`
+You can run flash the RP6 directly from terminal by going to this directory and typing `./robotflasher.sh`
 
 To flash type `./robotflasher.sh -f main.hex` <br>
 To flash and run the program type: `./robotflasher.sh -fr main.hex`<br>
