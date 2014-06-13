@@ -2,14 +2,14 @@
 
 You can run the RobotLoader by executing the following command in a terminal:
 
-- 32 bits system: `./robotloader_linux.sh`
-- 64 bits system: `./robotloader_linux_x64.sh`
+- 32-bit system: `./robotloader_linux.sh`
+- 64-bit system: `./robotloader_linux_x64.sh`
 
 Note: if the /dev/tty* ports are not visible then make the /dev/tty* accessible to the current user.
 Alternative is to run the above commands as superuser:
 
-- 32 bits system: `sudo ./robotloader_linux.sh`
-- 64 bits system: `sudo ./robotloader_linux_x64.sh`
+- 32-bit system: `sudo ./robotloader_linux.sh`
+- 64-bit system: `sudo ./robotloader_linux_x64.sh`
 
 # RobotFlasher
 You can run flash the RP6 directly from terminal by going to this directory and typing `./robotflasher.sh`
