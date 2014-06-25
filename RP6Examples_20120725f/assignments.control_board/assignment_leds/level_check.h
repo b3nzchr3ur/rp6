@@ -9,7 +9,7 @@
 #define LEVEL_CHECK_H_
 
 #include <stdint.h>
-#include <bool.h>
+#include <stdbool.h>
 
 bool is_level_detected(uint16_t measured_level, uint16_t threshold_level);
 
