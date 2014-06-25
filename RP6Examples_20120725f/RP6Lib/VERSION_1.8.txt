@@ -1,0 +1,5 @@
+Overall Version 1.8 - 25.07.2012
+
+RP6Library v.1.6 - 16.07.2012
+RP6ControlLibrary v.1.3 - 24.02.2012
+RP6M256Library v.1.1 - 16.07.2012
