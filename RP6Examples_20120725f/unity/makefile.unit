@@ -1,0 +1,143 @@
+#Note: This file is meant to be included in the
+#      makefile with definitions for:
+#      TARGET, SRC, RP6_LIB_PATH, RP6_LIB_PATH_OTHERS, UNITY_LIB_PATH, CODE_TO_TEST_PATH
+
+###############################################################################
+OPT = s
+DEBUG = dwarf-2
+CDEFS = -DUNITY_INT_WIDTH=16 -DUNITY_OUTPUT_CHAR=rp6_output_char_for_unity
+
+CINCS =
+
+CSTANDARD = -std=gnu99
+CFLAGS = -g$(DEBUG)
+CFLAGS += $(CDEFS) $(CINCS)
+CFLAGS += -O$(OPT)
+
+CFLAGS +=  -funsigned-char \
+           -funsigned-bitfields \
+           -fpack-struct \
+           -fshort-enums
+
+CFLAGS += -Wall -Wstrict-prototypes
+CFLAGS += -Wa,-adhlns=$(<:.c=.lst)
+CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
+CFLAGS += $(CSTANDARD)
+
+# Compiler flags to generate dependency files.
+GENDEPFLAGS = -MD -MP -MF .dep/$(@F).d
+
+# Combine all necessary flags and optional flags.
+# Add target processor to flags.
+#ALL_CFLAGS = -mmcu=$(MCU) -I. $(CFLAGS) $(GENDEPFLAGS)
+ALL_CFLAGS =  -I. $(CFLAGS) $(GENDEPFLAGS)
+
+#ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
+ALL_ASFLAGS = -I. -x assembler-with-cpp $(ASFLAGS)
+
+#============================================================================
+
+# Define programs and commands.
+SHELL = sh
+#SHELL = cmd.exe
+CC = gcc
+#CC="C:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc"
+REMOVE = rm -f
+REMOVEDIR = rmdir
+
+#============================================================================
+# Define Messages
+MSG_ERRORS_NONE = Errors: none
+MSG_BEGIN = -------- begin --------
+MSG_END = --------  end  --------
+MSG_LINKING = Linking:
+MSG_COMPILING = Compiling:
+MSG_ASSEMBLING = Assembling:
+MSG_CLEANING = Cleaning project:
+MSG_SEPERATOR_LINE = ------------------------------
+MSG_RUNNING_TESTCASES = Running test cases:
+
+#============================================================================
+# Define all object files.
+OBJ = $(SRC:.c=.o)
+
+# Define all listing files.
+LST = $(SRC:.c=.lst) $(ASRC:.S=.lst)
+
+# Default target.
+#all: begin gccversion sizebefore build sizeafter end
+#note: clean_object_files because they might be build for different cpu
+all: begin clean_object_files build test end
+
+build: exe
+
+# Eye candy.
+begin:
+		@echo
+		@echo $(MSG_BEGIN)
+
+end:
+		@echo $(MSG_END)
+		@echo
+
+exe: $(TARGET).exe
+
+%.exe: $(OBJ)
+		@echo
+		@echo $(MSG_LINKING) $@
+		$(CC) $(ALL_CFLAGS) $^ --output $@ $(LDFLAGS)
+
+# Compile: create object files from C source files.
+%.o : %.c
+		@echo
+		@echo $(MSG_COMPILING) $<
+		$(CC) -c $(ALL_CFLAGS) $< -o $@
+		
+#============================================================================
+# Target: clean project.
+clean: begin clean_list end
+
+clean_list : clean_object_files
+		@echo
+		@echo $(MSG_CLEANING)
+
+# We want to keep the generated hexfiles:
+		$(REMOVE) $(TARGET).cof
+		$(REMOVE) $(TARGET).exe
+		$(REMOVE) $(TARGET).elf
+		$(REMOVE) $(TARGET).map
+		$(REMOVE) $(TARGET).sym
+		$(REMOVE) $(TARGET).lss
+		$(REMOVE) $(TARGET).lst
+		$(REMOVE) $(LST)
+		$(REMOVE) $(SRC:.c=.s)
+		$(REMOVE) $(SRC:.c=.d)
+		$(REMOVE) $(SRC:.c=.i)
+		$(REMOVE) .dep/*
+		$(REMOVEDIR) .dep
+		
+clean_object_files:
+	$(REMOVE) $(OBJ)
+		
+test:
+	@echo $(MSG_SEPERATOR_LINE)
+	@echo $(MSG_RUNNING_TESTCASES)
+	./$(TARGET).exe
+
+# Include the dependency files.
+#include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
+include $(shell mkdir .dep) $(wildcard .dep/*)
+
+###############################################################################
+# Based on WinAVR Sample makefile written by Eric B. Weddington,
+# J�rg Wunsch, et al.
+# Released to the Public Domain.
+# Please read the "make" user manual!
+#
+# On command line:
+#
+# make all = Make software.
+# make clean = Clean out built project files.
+#
+# To rebuild project do "make clean" then "make all".
+###############################################################################
