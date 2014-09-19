@@ -19,7 +19,6 @@
 // Includes:
 
 #include "RP6ControlLib.h" // The RP6 Robot Control Library.
-								// Always needs to be included!
 
 #define RECEIVE_BUFFER_SIZE 101
 
@@ -65,6 +64,8 @@ void ShowDataReceivedOverUART( void )
 
 	clearLCD();
 	writeStringLCD(receiveBuffer);
+	writeString_P("Echo: ");
+	writeString(receiveBuffer);
 }
 
 int main(void)

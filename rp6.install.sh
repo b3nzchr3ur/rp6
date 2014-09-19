@@ -14,7 +14,7 @@ function reportStep {
 	echo "" 
 }
 
-#Stop script when any of the command fail:
+#Stop script when any of the command fails:
 set -e
 
 reportStep "Installing software needed for RP6:"
