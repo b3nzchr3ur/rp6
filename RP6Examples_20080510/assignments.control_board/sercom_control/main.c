@@ -48,13 +48,20 @@ void ShowDataReceivedOverUART( void )
 	// check if no data was received
 	if (nrOfCharsReceived == 0) return;
 
-	if (nrOfCharsReceived > (RECEIVE_BUFFER_SIZE -1)) 
-		nrOfCharsReceived = RECEIVE_BUFFER_SIZE-1;
+	int index = 0;
+	while(getBufferLength() > 0) {
+		receiveBuffer[index] = readChar();
+		index++;
 
-	for(int c = 0; c < nrOfCharsReceived; c++) {
-		receiveBuffer[c] = readChar();
+		//- reserve the last character of the buffer for '\0' character
+		//- check not to write outside array boundaries.	
+		if (index > (RECEIVE_BUFFER_SIZE -2)) 
+		{
+			break;
+		}
 	}
-	receiveBuffer[nrOfCharsReceived + 1 ] = '\0';
+
+	receiveBuffer[index] = '\0';
 
 	clearLCD();
 	writeStringLCD(receiveBuffer);
