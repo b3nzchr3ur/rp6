@@ -6,9 +6,8 @@
 
 #define ARDUINO_DEVICE_ADDRESS (42)
 #define ARDUINO_WRITE_ADDRESS (ARDUINO_DEVICE_ADDRESS << 1)
-#define ARDUINO_READ_ADDRESS (ARDUINO_WRITE_ADDRESS + 1)
-
-static uint8_t someByteToSend = 0; 
+#define ARDUINO_READ_ADDRESS (ARDUINO_WRITE_ADDRESS + 1) 
+//static uint8_t someByteToSend = 0; 
 
 /**
  * This function gets called automatically if there was an I2C Error like
@@ -28,26 +27,58 @@ void I2C_transmissionError(uint8_t errorState)
 
 void sendByteAndReceiveByte(void)
 {
+	//writeString_P("1\n");
 	if(getStopwatch1() > 500) {
-	
-                writeString_P("\nSend: ");
+	writeString_P("2\n");
+
 		
 		//TODO: send someByteToSend to the Arduino
+		/*	
+		I2CTWI_transmit2Bytes(ARDUINO_WRITE_ADDRESS,1, someByteToSend);
+
 
 		someByteToSend += 5;		
 	
 		if(someByteToSend > 255) 
 		{
 			someByteToSend = 0;
-		}
+		}*/
 
-		uint8_t someByteToRead = 0;
+		//uint8_t someByteToRead = 0;
                 
 		//TODO: read someByteToSend from the Arduino
+		//someByteToRead = I2CTWI_readByte(ARDUINO_READ_ADDRESS);
 
-		writeString_P("\nReceived: ");
+		/*writeString_P("\nReceived: ");
                 writeInteger(someByteToRead,DEC);
+		writeChar('\n');*/
+
+		
+		uint8_t a = 4;
+		uint8_t b = 8;
+		
+		I2CTWI_transmit2Bytes(ARDUINO_WRITE_ADDRESS,21, a);
+		I2CTWI_transmit2Bytes(ARDUINO_WRITE_ADDRESS,22, b);
+		
+		
+		        writeString_P("\nSend: ");
+                writeInteger(a,DEC);
+                writeString_P("\nSend: ");
+                writeInteger(b,DEC);
+		
+		I2CTWI_transmitByte(ARDUINO_WRITE_ADDRESS,23);
+		uint8_t min = I2CTWI_readByte(ARDUINO_READ_ADDRESS);
+		I2CTWI_transmitByte(ARDUINO_WRITE_ADDRESS,24);
+		uint8_t max = I2CTWI_readByte(ARDUINO_READ_ADDRESS);			
+		//assert(a == min);
+		
+		writeString_P("\nMinVal: ");
+                writeInteger(min,DEC);
 		writeChar('\n');
+		writeString_P("\nMaxVal: ");
+		writeInteger(max,DEC);
+		writeChar('\n');
+		
 		setStopwatch1(0);	
 	}
 }
