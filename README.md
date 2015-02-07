@@ -13,3 +13,8 @@ Modifications of code repository for RP6-code from http://www.arexx.com/rp6
 ## Tooling
 - Added [install script](rp6.install.sh) for Linux systems.
 - Added [command line script](RobotLoader_20120924/README.md) to RobotLoader for programming RP6. (Kudos to [@Xesxen](http://github.com/Xesxen) and [@Bramvangemert](http://github.com/Bramvangemert)).
+
+
+## Additional links
+
+- RP6 Simulator: [rp6simul](http://sourceforge.net/p/rp6simul/wiki/Manual/#rp6simul-manual)
