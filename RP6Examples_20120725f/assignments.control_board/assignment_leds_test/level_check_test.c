@@ -18,7 +18,7 @@ void test_level_is_too_low(void)
 void test_level_is_just_high_enough(void)
 {
 	bool actual = true; // TODO: is_level_detected(?, ?);
-	bool expected = false;
+	bool expected = true;
 	TEST_ASSERT( expected == actual );
 }
 
