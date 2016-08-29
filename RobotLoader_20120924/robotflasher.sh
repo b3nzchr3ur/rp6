@@ -25,6 +25,7 @@ THE SOFTWARE.
 dir=$(dirname $0)
 file=$(readlink -f "$2" 2>/dev/null )
 arch=$(uname -m)
+port=/dev/ttyUSB0
 
 if [[ $arch == "x86_64" ]] ; then 
     libpath="./lib/linux_x64"
@@ -56,7 +57,7 @@ function flash
 validate_file $file
 
 pushd $dir
-sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=/dev/ttyUSB0 -hex="$file" 2>/dev/null
+sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=$port -hex="$file" 2>/dev/null
 popd
 
 }
@@ -66,7 +67,7 @@ function flashrun
 validate_file $file
 
 pushd $dir
-sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=/dev/ttyUSB0 -hex="$file" -s 2>/dev/null
+sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=$port -hex="$file" -s 2>/dev/null
 popd
 
 }
@@ -74,7 +75,7 @@ popd
 function erase
 {
 pushd $dir
-sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=/dev/ttyUSB0 -e 2>/dev/null
+sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=$port -e 2>/dev/null
 popd
 }
 function Help
@@ -86,28 +87,44 @@ echo "-fr directly runs the flash utility and runs the program after"
 echo "-e erases the memory"
 echo "-h shows help"
 echo "-id shows information about the rp6"
+echo "with -p you can specify the port if it's not ttyUSB0. Use the USB index only."
+echo "Example:  ./robotflasher.sh -f test.hex -p 4"
+echo "This will be flash the file 'test.hex' to the RP6 that's connected to ttyUSB4"
 }
 function Id
 {
 pushd $dir
-sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=/dev/ttyUSB0 -id 2>/dev/null
+sudo java -Xmx256m -Djava.library.path="$libpath" -jar ./RobotLoader_lib.jar -c -port=$port -id 2>/dev/null
 popd
 }
 
+function checkPort 
+{
 case "$1" in
-    -f)
-        flash
+	-p)
+		port=/dev/ttyUSB"$2"
+		;;
+esac
+}
+
+case "$1" in
+    	-f)
+		checkPort $3 $4
+        	flash
 		exit    
 		;;
 	-fr)
+		checkPort $3 $4
 		flashrun
 		exit
 		;;
 	-e)
+		checkPort $2 $3
 		erase
 		exit
 		;;
 	-id)
+		checkPort $2 $3
 		Id
 		exit
 		;;
